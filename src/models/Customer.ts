@@ -8,8 +8,6 @@ export interface CustomerInstance extends Model {
   cpf: string;
   gender: string;
   birthdate: Date;
-  address: number;
-  contact: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -33,12 +31,6 @@ export const Customer = sequelize.define<CustomerInstance>(
     },
     birthdate: {
       type: DataTypes.DATE,
-    },
-    address: {
-      type: DataTypes.INTEGER,
-    },
-    contact: {
-      type: DataTypes.INTEGER,
     },
     createdAt: {
       type: DataTypes.DATE,
