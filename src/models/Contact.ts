@@ -6,7 +6,6 @@ export interface ContactInstance extends Model {
   id: number;
   type: string;
   description: string;
-  responsible: string;
 }
 
 export const Contact = sequelize.define<ContactInstance>(
@@ -21,9 +20,6 @@ export const Contact = sequelize.define<ContactInstance>(
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.STRING,
-    },
-    responsible: {
       type: DataTypes.STRING,
     },
   },
