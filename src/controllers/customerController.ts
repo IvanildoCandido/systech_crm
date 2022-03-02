@@ -5,12 +5,12 @@ export const ping = async (req: Request, res: Response) => {
   res.json({ pong: true });
 };
 
-export const listStudents = async (req: Request, res: Response) => {
-  let students = await Customer.findAll();
-  res.json(students);
+export const listCustomers = async (req: Request, res: Response) => {
+  let customers = await Customer.findAll();
+  res.json(customers);
 };
 
-export const addStudent = async (req: Request, res: Response) => {
+export const addCustomer = async (req: Request, res: Response) => {
   const { studentName, className } = req.body;
   await Customer.create({ studentName, className }).then((result) =>
     res.json(result)
