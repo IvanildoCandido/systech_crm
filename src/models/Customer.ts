@@ -1,6 +1,8 @@
 import { Model, DataTypes } from "sequelize";
 
 import { sequelize } from "../instances/mysql";
+import { Address } from "./Address";
+import { CustomeresAddresses } from "./CustomersAddresses";
 
 export interface CustomerInstance extends Model {
   id: number;
@@ -46,3 +48,18 @@ export const Customer = sequelize.define<CustomerInstance>(
     timestamps: true,
   }
 );
+
+Customer.belongsToMany(Address, {
+  through: {
+    model: CustomeresAddresses,
+  },
+  foreignKey: "id_customer",
+  constraints: true,
+});
+Address.belongsToMany(Customer, {
+  through: {
+    model: CustomeresAddresses,
+  },
+  foreignKey: "id_address",
+  constraints: true,
+});

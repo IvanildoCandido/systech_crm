@@ -5,6 +5,7 @@ import { sequelize } from "../instances/mysql";
 export interface AddressInstance extends Model {
   id: number;
   cep: string;
+  street: string;
   number: string;
   complement: string;
   district: string;
@@ -22,6 +23,9 @@ export const Address = sequelize.define<AddressInstance>(
       type: DataTypes.INTEGER,
     },
     cep: {
+      type: DataTypes.STRING,
+    },
+    street: {
       type: DataTypes.STRING,
     },
     number: {
