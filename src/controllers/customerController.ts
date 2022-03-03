@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Address } from "../models/Address";
+import { Contact } from "../models/Contact";
 import { Customer } from "../models/Customer";
 
 export const ping = async (req: Request, res: Response) => {
@@ -8,7 +9,10 @@ export const ping = async (req: Request, res: Response) => {
 
 export const listCustomers = async (req: Request, res: Response) => {
   const customers = await Customer.findAll({
-    include: [{ model: Address, as: "Addresses", through: { attributes: [] } }],
+    include: [
+      { model: Address, as: "Addresses", through: { attributes: [] } },
+      { model: Contact, as: "Contacts", through: { attributes: [] } },
+    ],
   });
   res.json(customers);
 };

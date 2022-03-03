@@ -2,7 +2,9 @@ import { Model, DataTypes } from "sequelize";
 
 import { sequelize } from "../instances/mysql";
 import { Address } from "./Address";
+import { Contact } from "./Contact";
 import { CustomeresAddresses } from "./CustomersAddresses";
+import { CustomersContacts } from "./CustomersContacts";
 
 export interface CustomerInstance extends Model {
   id: number;
@@ -61,5 +63,19 @@ Address.belongsToMany(Customer, {
     model: CustomeresAddresses,
   },
   foreignKey: "id_address",
+  constraints: true,
+});
+Customer.belongsToMany(Contact, {
+  through: {
+    model: CustomersContacts,
+  },
+  foreignKey: "id_customer",
+  constraints: true,
+});
+Contact.belongsToMany(Customer, {
+  through: {
+    model: CustomersContacts,
+  },
+  foreignKey: "id_contact",
   constraints: true,
 });
