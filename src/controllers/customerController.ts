@@ -18,35 +18,34 @@ export const listCustomers = async (req: Request, res: Response) => {
 };
 
 export const addCustomer = async (req: Request, res: Response) => {
-  const { studentName, className } = req.body;
-  await Customer.create({ studentName, className }).then((result) =>
+  const { name, cpf, gender, birthdate } = req.body;
+  await Customer.create({ name, cpf, gender, birthdate }).then((result) =>
     res.json(result)
   );
 };
 
-export const editStudent = async (req: Request, res: Response) => {
+export const editCustomer = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { studentName, className } = req.body;
-  const studentObject = await Customer.findByPk(id);
-  // if (studentObject) {
-  //   if (studentName !== undefined) {
-  //     studentObject.studentName = studentName;
-  //   }
-  //   if (className !== undefined) {
-  //     studentObject.className = className;
-  //   }
-  //   studentObject.save();
-  // }
-  // res.json(studentObject);
+  const customerToEdit = req.body;
+  const customerDataBase = await Customer.findByPk(id);
+  if (customerDataBase) {
+    Object.keys(customerToEdit).forEach((key) => {
+      if (key !== undefined) {
+        customerDataBase[key] = customerToEdit[key];
+      }
+    });
+    customerDataBase.save();
+  }
+  res.json(customerDataBase);
 };
 
-export const deleteStudent = async (req: Request, res: Response) => {
+export const deleteCustomer = async (req: Request, res: Response) => {
   const { id } = req.params;
   await Customer.destroy({ where: { id } }).then((result) => {
     if (result === 1) {
-      res.send("Usuário excluído com sucesso!");
+      res.send("Cliente excluído com sucesso!");
     } else {
-      res.send("Erro ao excluir usuário!");
+      res.send("Erro ao excluir o cliente!");
     }
   });
 };

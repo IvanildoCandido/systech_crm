@@ -15,8 +15,8 @@ router.post("/users/register", userController.register);
 // Routes from Customers
 router.get("/customers", Auth.private, customerController.listCustomers);
 router.post("/customers", customerController.addCustomer);
-router.put("/customers/:id", customerController.editStudent);
-router.delete("/customers/:id", customerController.deleteStudent);
+router.put("/customers/:id", customerController.editCustomer);
+router.delete("/customers/:id", customerController.deleteCustomer);
 
 // Routes from Addresses
 router.get("/addresses", addressController.listAddress);

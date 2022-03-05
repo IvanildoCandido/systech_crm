@@ -6,7 +6,11 @@ import { Contact } from "./Contact";
 import { CustomeresAddresses } from "./CustomersAddresses";
 import { CustomersContacts } from "./CustomersContacts";
 
-export interface CustomerInstance extends Model {
+type Dictionary = {
+  [key: string]: unknown;
+}
+
+export interface CustomerInstance extends Model, Dictionary {
   id: number;
   name: string;
   cpf: string;
