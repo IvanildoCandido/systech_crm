@@ -13,6 +13,28 @@ export const addContact = async (req: Request, res: Response) => {
   );
 };
 
-export const editContact = async (req: Request, res: Response) => {};
+export const editContact = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const contactToEdit = req.body;
+  const contactDataBase = await Contact.findByPk(id);
+  if (contactDataBase) {
+    Object.keys(contactToEdit).forEach((key) => {
+      if (key !== undefined) {
+        contactDataBase[key] = contactToEdit[key];
+      }
+    });
+    contactDataBase.save();
+  }
+  res.json(contactDataBase);
+};
 
-export const deleteContact = async (req: Request, res: Response) => {};
+export const deleteContact = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await Contact.destroy({ where: { id } }).then((result) => {
+    if (result === 1) {
+      res.send("Contato excluído com sucesso!");
+    } else {
+      res.send("Erro ao excluir o contato!");
+    }
+  });
+};

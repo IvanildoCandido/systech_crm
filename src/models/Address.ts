@@ -2,7 +2,11 @@ import { Model, DataTypes } from "sequelize";
 
 import { sequelize } from "../instances/mysql";
 
-export interface AddressInstance extends Model {
+type Dictionary = {
+  [key: string]: unknown;
+};
+
+export interface AddressInstance extends Model, Dictionary {
   id: number;
   cep: string;
   street: string;
