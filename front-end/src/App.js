@@ -1,5 +1,7 @@
+import Screen from "./components/Screen/Screen";
+
 function App() {
-  return <h1>My System</h1>;
+  return <Screen />;
 }
 
 export default App;
